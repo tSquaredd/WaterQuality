@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_controller"
+    app:startDestination="@id/nav_readings">
+
+    <fragment
+        android:id="@+id/nav_readings"
+        android:name="com.tsquaredapplications.waterquality.presenters.ReadingsFragment"
+        android:label="fragment_readings"
+        tools:layout="@layout/fragment_readings" />
+    <fragment
+        android:id="@+id/nav_history_log"
+        android:name="com.tsquaredapplications.waterquality.presenters.HistoryLogFragment"
+        android:label="fragment_history_log"
+        tools:layout="@layout/fragment_history_log" />
+    <fragment
+        android:id="@+id/nav_history_graph"
+        android:name="com.tsquaredapplications.waterquality.presenters.HistoryGraphFragment"
+        android:label="fragment_history_graph"
+        tools:layout="@layout/fragment_history_graph" />
+</navigation>
