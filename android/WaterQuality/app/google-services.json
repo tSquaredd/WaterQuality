@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "202905132969",
+    "firebase_url": "https://waterquality-3a1d7.firebaseio.com",
+    "project_id": "waterquality-3a1d7",
+    "storage_bucket": "waterquality-3a1d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202905132969:android:334c8211df2ad316",
+        "android_client_info": {
+          "package_name": "com.tsquaredapplications.waterquality"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202905132969-t2ud5p37vqc5jsg0hkb46r3363e06mvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaaF_Lr79dJwjDnMrRHuUEDX_EjfvRdCU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
