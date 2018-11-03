@@ -6,4 +6,6 @@
     <string name="readings">Readings</string>
     <string name="log">Log</string>
     <string name="graph">Graph</string>
+    <string name="flow">Water Flow</string>
+    <string name="temp">Temperature</string>
 </resources>
