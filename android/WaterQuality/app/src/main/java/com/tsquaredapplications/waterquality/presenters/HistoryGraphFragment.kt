@@ -20,6 +20,7 @@ import com.robinhood.ticker.TickerUtils
 import com.tsquaredapplications.waterquality.R
 import com.tsquaredapplications.waterquality.adapters.SparkViewFloatAdapter
 import com.tsquaredapplications.waterquality.data.WaterData
+import com.tsquaredapplications.waterquality.util.FloatUtil
 import com.tsquaredapplications.waterquality.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_history_graph.*
 import java.util.*
@@ -121,7 +122,7 @@ class HistoryGraphFragment : Fragment() {
 
                 val currentFlow = floatList[floatList.size - 1]
 
-                graph_ticker.text = currentFlow.toString()
+                graph_ticker.text = FloatUtil.round(currentFlow, 2).toString()
                 adapter = SparkViewFloatAdapter(floatList)
                 graph_spark.adapter = adapter
 
@@ -156,7 +157,7 @@ class HistoryGraphFragment : Fragment() {
 
                 val currentTemp = floatList[floatList.size - 1]
 
-                graph_ticker.text = currentTemp.toString()
+                graph_ticker.text = FloatUtil.round(currentTemp, 2).toString()
                 adapter = SparkViewFloatAdapter(floatList)
                 graph_spark.adapter = adapter
 
@@ -193,7 +194,7 @@ class HistoryGraphFragment : Fragment() {
                 }
 
                 val currentTds = floatList[floatList.size - 1]
-                graph_ticker.text = currentTds.toString()
+                graph_ticker.text = FloatUtil.round(currentTds, 2).toString()
 
                 adapter = SparkViewFloatAdapter(floatList)
                 graph_spark.adapter = adapter
@@ -241,7 +242,7 @@ class HistoryGraphFragment : Fragment() {
                 }
 
                 val currentPh = floatList[floatList.size - 1]
-                graph_ticker.text = currentPh.toString()
+                graph_ticker.text = FloatUtil.round(currentPh, 2).toString()
 
                 adapter = SparkViewFloatAdapter(floatList)
                 graph_spark.adapter = adapter
@@ -273,23 +274,25 @@ class HistoryGraphFragment : Fragment() {
             }
         }
         // Set stat card values
-        max_ticker.text = max.toString()
-        min_ticker.text = min.toString()
+        max_ticker.text = FloatUtil.round(max, 2).toString()
+        min_ticker.text = FloatUtil.round(min, 2).toString()
 
         val avg = total / dataList.size
-        avg_ticker.text = avg.toString()
+        avg_ticker.text = FloatUtil.round(avg,2).toString()
     }
 
     fun setScrubber() {
         graph_spark.setScrubListener {
             if (it == null){
-                graph_ticker.text = when(currentType){
-                    0 -> dataList[dataList.size - 1].flow.toString()
-                    1 -> dataList[dataList.size - 1].temp.toString()
-                    2 -> dataList[dataList.size - 1].tds.toString()
-                    3 -> dataList[dataList.size - 1].pH.toString()
-                    else -> ""
+                val scrubValue = when(currentType){
+                    0 -> dataList[dataList.size - 1].flow
+                    1 -> dataList[dataList.size - 1].temp
+                    2 -> dataList[dataList.size - 1].tds
+                    3 -> dataList[dataList.size - 1].pH
+                    else -> 0.0f
                 }
+
+                graph_ticker.text = FloatUtil.round(scrubValue, 2).toString()
                 val date = dataList[dataList.size - 1]
                 val dateString = "${date.month}/${date.day}/${date.year} ${date.hour}:${date.min}.${date.sec}"
                 graph_date_display.text = dateString
@@ -297,7 +300,7 @@ class HistoryGraphFragment : Fragment() {
             }
 
             else {
-                graph_ticker.text = (it as Pair<Float, Int>).first.toString()
+                graph_ticker.text = FloatUtil.round((it as Pair<Float, Int>).first,2).toString()
                 val index = (it as Pair<Float, Int>).second
                 val date = dataList[index]
                 val dateString = "${date.month}/${date.day}/${date.year} ${date.hour}:${date.min}.${date.sec}"
