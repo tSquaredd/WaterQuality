@@ -2,14 +2,10 @@ package com.tsquaredapplications.waterquality.presenters
 
 
 import android.os.Bundle
-import android.util.Log
-import android.util.TypedValue
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -60,6 +56,10 @@ class ReadingsFragment : Fragment() {
         tempCard.label.text = getString(R.string.temp)
         tdsCard.label.text = getString(R.string.tds)
         phCard.label.text = getString(R.string.ph)
+
+        tempCard.unit_label.text = getString(R.string.temp_unit)
+        flowCard.unit_label.text = getString(R.string.flow_unit)
+        tdsCard.unit_label.text = getString(R.string.tds_unit)
 
 //        val params = readings_root_layout.layoutParams as FrameLayout.LayoutParams
 //        val tv = TypedValue()
