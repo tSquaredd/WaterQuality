@@ -20,4 +20,20 @@
     <string name="tds_log">TDS: %1s ppm</string>
     <string name="ph_log">pH: %1s</string>
 
+    <string name="max_format">Max: %1s</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="avg">Avg</string>
+    <string name="status">Status</string>
+    <string name="freezing">Freezing</string>
+    <string name="scalding">Scalding</string>
+    <string name="great">Great</string>
+    <string name="not_flowing">Not Flowing</string>
+    <string name="flowing">Flowing</string>
+    <string name="excellent">Excellent</string>
+    <string name="good">Good</string>
+    <string name="fair">Fair</string>
+    <string name="poor">Poor</string>
+    <string name="danger">DANGER</string>
+
 </resources>

@@ -46,6 +46,9 @@ dependencies {
     implementation 'com.robinhood.spark:spark:1.2.0'
     implementation 'com.robinhood.ticker:ticker:2.0.0'
 
+    implementation 'com.github.arcadefire:nice-spinner:1.3.4'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'

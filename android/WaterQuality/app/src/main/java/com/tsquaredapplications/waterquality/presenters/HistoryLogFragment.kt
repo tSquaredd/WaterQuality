@@ -38,7 +38,7 @@ class HistoryLogFragment : androidx.fragment.app.Fragment() {
 
         viewModel.getDataStream().observe(this, Observer {
             if (adapter == null){
-                adapter = ReadingLogAdapter(ArrayList(it), context!!)
+                adapter = ReadingLogAdapter(ArrayList(it.reversed()), context!!)
                 val layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 recycler_log.layoutManager = layoutManager
                 recycler_log.adapter = adapter

@@ -26,7 +26,9 @@ class ReadingLogAdapter(val readingsList: ArrayList<WaterData>, val context: Con
         val dateString = "${currentItem.month}/${currentItem.day}/${currentItem.year}"
         holder.date.text = dateString
 
-        val timeString = "${currentItem.hour}:${currentItem.min}.${currentItem.sec}"
+        val min = if (currentItem.min < 10) "0${currentItem.min}" else "${currentItem.min}"
+        val sec = if (currentItem.sec < 10) "0${currentItem.sec}" else "${currentItem.sec}"
+        val timeString = "${currentItem.hour}:$min.$sec"
         holder.time.text = timeString
 
         val flowString = context.getString(R.string.flow_log, currentItem.flow.toString())
@@ -40,8 +42,6 @@ class ReadingLogAdapter(val readingsList: ArrayList<WaterData>, val context: Con
 
         val phString = context.getString(R.string.ph_log, currentItem.pH.toString())
         holder.ph.text = phString
-
-
     }
 
     inner class ReadingLogViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
