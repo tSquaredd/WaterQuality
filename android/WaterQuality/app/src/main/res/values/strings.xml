@@ -36,4 +36,7 @@
     <string name="poor">Poor</string>
     <string name="danger">DANGER</string>
 
+    <string name="message_notification_channel_id" translatable="false">fcm_message_channel</string>
+    <string name="message_channel_name">Warning</string>
+
 </resources>
