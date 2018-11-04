@@ -41,6 +41,11 @@ dependencies {
     // Jetpack Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha06"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha05"
+
+    //Robinhood ticker and spark
+    implementation 'com.robinhood.spark:spark:1.2.0'
+    implementation 'com.robinhood.ticker:ticker:2.0.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
