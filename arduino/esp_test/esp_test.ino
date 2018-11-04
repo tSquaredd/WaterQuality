@@ -70,8 +70,8 @@ void loop(){
   Firebase.push("DATA", root);
 
   if(Firebase.success()){
-    Serial.println("sent");
+    Serial.print("sent");
     } else{
-      Serial.println("bad");
+      Serial.print("bad");
     }
 }

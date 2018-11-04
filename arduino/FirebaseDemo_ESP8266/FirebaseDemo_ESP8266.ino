@@ -33,10 +33,7 @@ void setup() {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-  }
-  Serial.print("connected: ");
-  Serial.println(WiFi.localIP());
-  
+  }  
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 }
 
@@ -93,6 +90,7 @@ void loop() {
   delay(1000);
 
   // append a new value to /logs
+  
   String name = Firebase.pushInt("logs", n++);
   // handle error
   if (Firebase.failed()) {
