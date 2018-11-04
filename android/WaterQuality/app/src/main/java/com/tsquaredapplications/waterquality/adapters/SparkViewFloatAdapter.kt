@@ -10,7 +10,8 @@ class SparkViewFloatAdapter(val yData: ArrayList<Float>): SparkAdapter() {
     }
 
     override fun getItem(index: Int): Any {
-       return yData[index]
+       return Pair(yData[index], index)
+
     }
 
     override fun getCount(): Int {

@@ -7,4 +7,9 @@
     <color name="selectedWhite">#FFFFFF</color>
     <color name="unselectedWhite">#CCCCCC</color>
     <color name="backgroundColor">#777777</color>
+    
+    <color name="red">#dd0000</color>
+    <color name="green">#00dd00</color>
+    <color name="yellow">#dddd00</color>
+    <color name="black">#111111</color>
 </resources>

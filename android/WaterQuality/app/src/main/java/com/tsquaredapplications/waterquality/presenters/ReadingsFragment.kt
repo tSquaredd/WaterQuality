@@ -15,6 +15,7 @@ import com.robinhood.ticker.TickerUtils
 import com.tsquaredapplications.waterquality.R
 import com.tsquaredapplications.waterquality.adapters.SparkViewFloatAdapter
 import com.tsquaredapplications.waterquality.data.WaterData
+import com.tsquaredapplications.waterquality.util.FloatUtil
 import com.tsquaredapplications.waterquality.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_readings.*
 import kotlinx.android.synthetic.main.reading_card_view.view.*
@@ -61,15 +62,6 @@ class ReadingsFragment : Fragment() {
         flowCard.unit_label.text = getString(R.string.flow_unit)
         tdsCard.unit_label.text = getString(R.string.tds_unit)
 
-//        val params = readings_root_layout.layoutParams as FrameLayout.LayoutParams
-//        val tv = TypedValue()
-//        var actionBarHeight = 0
-//        if (activity!!.theme.resolveAttribute(R.attr.actionBarSize, tv, true)) {
-//            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
-//        }
-//        params.bottomMargin = 8 + actionBarHeight
-//        readings_root_layout.layoutParams = params
-
     }
 
     override fun onResume() {
@@ -92,60 +84,61 @@ class ReadingsFragment : Fragment() {
 
         override fun onChanged(it: List<WaterData>?) {
             it?.let {
-                for(reading in it){
-                    if(flowAdapter == null)
+                for (reading in it) {
+                    if (flowAdapter == null)
                         flowList.add(reading.flow)
 
-                    if(tempAdapter == null)
+                    if (tempAdapter == null)
                         tempList.add(reading.temp)
 
-                    if(tdsAdapter == null)
+                    if (tdsAdapter == null)
                         tdsList.add(reading.tds)
 
-                    if(phAdapter == null)
+                    if (phAdapter == null)
                         phList.add(reading.pH)
 
                 }
+                if (it.size > 1) {
+                    // FLOW
+                    flowCard.ticker.text = FloatUtil.round(it[it.size - 1].flow, 2).toString()
 
-                // FLOW
-                flowCard.ticker.text = (it[it.size - 1].flow.toString())
+                    if (flowAdapter == null) {
+                        flowAdapter = SparkViewFloatAdapter(flowList)
+                        flowCard.spark_view.adapter = flowAdapter
+                    } else
+                        flowAdapter!!.addReading(it[it.size - 1].flow)
 
-                if (flowAdapter == null){
-                    flowAdapter = SparkViewFloatAdapter(flowList)
-                    flowCard.spark_view.adapter = flowAdapter
+                    // TEMP
+                    tempCard.ticker.text = FloatUtil.round(it[it.size - 1].temp, 2).toString()
+
+                    if (tempAdapter == null) {
+                        tempAdapter = SparkViewFloatAdapter(tempList)
+                        tempCard.spark_view.adapter = tempAdapter
+                    } else
+                        tempAdapter!!.addReading(it[it.size - 1].temp)
+
+                    // TDS
+                    tdsCard.ticker.text = FloatUtil.round(it[it.size - 1].tds, 2).toString()
+
+                    if (tdsAdapter == null) {
+                        tdsAdapter = SparkViewFloatAdapter(tdsList)
+                        tdsCard.spark_view.adapter = tdsAdapter
+                    } else
+                        tdsAdapter!!.addReading(it[it.size - 1].tds)
+
+                    // pH
+                    phCard.ticker.text = FloatUtil.round(it[it.size - 1].pH, 2).toString()
+
+                    if (phAdapter == null) {
+                        phAdapter = SparkViewFloatAdapter(phList)
+                        phCard.spark_view.adapter = phAdapter
+                    } else
+                        phAdapter!!.addReading(it[it.size - 1].pH)
                 }
-                else
-                    flowAdapter!!.addReading(it[it.size - 1].flow)
 
-                // TEMP
-                tempCard.ticker.text = (it[it.size - 1].temp.toString())
-
-                if (tempAdapter == null){
-                    tempAdapter = SparkViewFloatAdapter(tempList)
-                    tempCard.spark_view.adapter = tempAdapter
+                else {
+                    // TODO DISPLAY EMPTY VIEW
                 }
-                else
-                    tempAdapter!!.addReading(it[it.size - 1].temp)
-
-                // TDS
-                tdsCard.ticker.text = (it[it.size - 1].tds.toString())
-
-                if (tdsAdapter == null){
-                    tdsAdapter = SparkViewFloatAdapter(tdsList)
-                    tdsCard.spark_view.adapter = tdsAdapter
-                }
-                else
-                    tdsAdapter!!.addReading(it[it.size - 1].tds)
-
-                // pH
-                phCard.ticker.text = (it[it.size - 1].pH.toString())
-
-                if (phAdapter == null){
-                    phAdapter = SparkViewFloatAdapter(phList)
-                    phCard.spark_view.adapter = phAdapter
-                }
-                else
-                    phAdapter!!.addReading(it[it.size - 1].pH)
             }
         }
     }
