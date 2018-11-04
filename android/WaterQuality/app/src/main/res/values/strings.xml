@@ -15,4 +15,9 @@
     <string name="flow_unit">L/min</string>
     <string name="tds_unit">ppm</string>
 
+    <string name="temp_log">Temperature: %1s\u00B0C</string>
+    <string name="flow_log">Flow Strength: %1s L/min</string>
+    <string name="tds_log">TDS: %1s ppm</string>
+    <string name="ph_log">pH: %1s</string>
+
 </resources>

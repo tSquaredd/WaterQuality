@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".presenters.ReadingsFragment"
     tools:layout_editor_absoluteY="81dp"
-    android:background="#777777">
+    android:background="@color/backgroundColor">
 
     <include
         android:id="@+id/flow_view"

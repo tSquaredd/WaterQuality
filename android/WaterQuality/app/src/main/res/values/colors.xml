@@ -6,4 +6,5 @@
 
     <color name="selectedWhite">#FFFFFF</color>
     <color name="unselectedWhite">#CCCCCC</color>
+    <color name="backgroundColor">#777777</color>
 </resources>
