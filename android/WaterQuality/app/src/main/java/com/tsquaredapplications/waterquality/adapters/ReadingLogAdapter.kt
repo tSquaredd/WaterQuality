@@ -56,6 +56,6 @@ class ReadingLogAdapter(val readingsList: ArrayList<WaterData>, val context: Con
 
     fun newData(newItem: WaterData){
         readingsList.add(newItem)
-        notifyItemChanged(readingsList.size - 1)
+        notifyItemChanged(0)
     }
 }
