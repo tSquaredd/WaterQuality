@@ -104,10 +104,9 @@ void setup() {
   sensors.begin();
   
   //delay
-  delay(60000);
   Serial.println("startup complete");
   
-  //rtc.setTime(0,11,0);
+  //rtc.setTime(9,24,0);
   //rtc.setDate(4,11,2018);
 }
 
@@ -134,6 +133,8 @@ int getMedianNum(int bArray[], int iFilterLen){
  return bTemp;
 } 
 
+int counter = 0;
+
 void loop() {
   // reset flag
   flag = true;
@@ -143,13 +144,16 @@ void loop() {
   voltage = 5 / 1024.0 * measure;
   po = 7 + ((2.5 - voltage) / 0.18);
   data.pH = po;
+  Serial.print("pH: ");
   Serial.println(data.pH);
 
   // read/save data from temp sensor
-  Serial.println(sensors.getAddress(t_address, 0));
+  sensors.getAddress(t_address, 0);
   sensors.requestTemperatures();
   data.temp = sensors.getTempC(t_address);
-  Serial.println(data.temp);
+  Serial.print("temp: ");
+  Serial.print(data.temp);
+  Serial.println(" C");
   temperature = data.temp;
   
   // read/save data from tds sensor
@@ -163,12 +167,14 @@ void loop() {
     if(analogBufferIndex == SCOUNT)
       analogBufferIndex = 0;
   }
+  
   static unsigned long printTimepoint = millis();
+  
   if(millis()-printTimepoint > 800U){
     printTimepoint = millis();
     for(copyIndex=0;copyIndex<SCOUNT;copyIndex++)
     analogBufferTemp[copyIndex]= analogBuffer[copyIndex];
-     // read the analog value more stable by the median filtering algorithm, and convert to voltage value
+    // read the analog value more stable by the median filtering algorithm, and convert to voltage value
     averageVoltage = getMedianNum(analogBufferTemp,SCOUNT) * (float)VREF / 1024.0;
     float compensationCoefficient=1.0+0.02*(temperature-25.0); 
     //temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
@@ -189,7 +195,9 @@ void loop() {
   // read/save data from flow meter
   float l_per_min = flowrate / 7.5;
   data.flow = l_per_min;
-  Serial.println(data.flow);
+  Serial.print("Flow rate: ");
+  Serial.print(data.flow);
+  Serial.println(" L/min");
   
   // read time from rtc and insert into packet
   Serial.println("getting real time");
@@ -200,38 +208,56 @@ void loop() {
   data.y = t.year;
   data.mth = t.mon;
   data.d = t.date;
-
+  Serial.print(data.h);
+  Serial.print(":");
+  Serial.print(data.m);
+  Serial.print(":");
+  Serial.print(data.s);
+  Serial.print(" ");
+  Serial.print(data.d);
+  Serial.print("-");
+  Serial.print(data.mth);
+  Serial.print("-");
+  Serial.println(data.y);
+  
   char buff[PACKET_SIZE];
 
   memcpy(buff, &data, PACKET_SIZE);
   
-  Serial.print("sending packet..");
-  Serial1.write(buff, PACKET_SIZE);
+  if(counter >= 20){
+    Serial.print("sending packet..");
+    Serial1.write(buff, PACKET_SIZE);
 
-  // wait for signal back
-  while(!Serial1.available()){
+    // wait for signal back
+    while(!Serial1.available()){
     };
 
-  // error check
-  String msg = Serial1.readString();
-  while(flag){
-    if(msg == "bad"){
-      // resend data
-      Serial.println("sending packet..");
-      Serial1.write(buff, PACKET_SIZE);
-      // wait for response
-      while(!Serial1.available()){
-      };
-      msg = Serial1.readString(); 
-    } else if(msg == "sent"){
-      Serial.println("send successful");
-      flag = false; 
-    } else {
-      Serial.println("something is badddd");
-      flag = false;
+    // error check
+    String msg = Serial1.readString();
+    while(flag){
+      if(msg == "bad"){
+        // resend data
+        Serial.println("sending packet..");
+        Serial1.write(buff, PACKET_SIZE);
+        // wait for response
+        while(!Serial1.available()){
+        };
+        msg = Serial1.readString(); 
+      } else if(msg == "sent"){
+        Serial.println("send successful");
+        flag = false; 
+      } else {
+        Serial.println("something is badddd");
+        flag = false;
+      }
     }
   }
   
-  // Wait three seconds before repeating :)
-  delay (1000); 
+  if(counter < 20){
+    counter++;
+  }
+  
+  
+  // Wait five seconds before repeating :)
+  delay (5000); 
  }
