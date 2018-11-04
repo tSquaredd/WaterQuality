@@ -294,7 +294,9 @@ class HistoryGraphFragment : Fragment() {
 
                 graph_ticker.text = FloatUtil.round(scrubValue, 2).toString()
                 val date = dataList[dataList.size - 1]
-                val dateString = "${date.month}/${date.day}/${date.year} ${date.hour}:${date.min}.${date.sec}"
+                val min = if (date.min < 10) "0${date.min}" else "${date.min}"
+                val sec = if (date.sec < 10) "0${date.sec}" else "${date.sec}"
+                val dateString = "${date.month}/${date.day}/${date.year} ${date.hour}:$min.$sec"
                 graph_date_display.text = dateString
 
             }
@@ -303,7 +305,9 @@ class HistoryGraphFragment : Fragment() {
                 graph_ticker.text = FloatUtil.round((it as Pair<Float, Int>).first,2).toString()
                 val index = (it as Pair<Float, Int>).second
                 val date = dataList[index]
-                val dateString = "${date.month}/${date.day}/${date.year} ${date.hour}:${date.min}.${date.sec}"
+                val min = if (date.min < 10) "0${date.min}" else "${date.min}"
+                val sec = if (date.sec < 10) "0${date.sec}" else "${date.sec}"
+                val dateString = "${date.month}/${date.day}/${date.year} ${date.hour}:$min.$sec"
                 graph_date_display.text = dateString
 
             }
