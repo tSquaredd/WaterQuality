@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tsquaredapplications.waterquality.R
 import com.tsquaredapplications.waterquality.data.WaterData
+import com.tsquaredapplications.waterquality.util.FloatUtil
 import kotlinx.android.synthetic.main.reading_log_item.view.*
 
 class ReadingLogAdapter(val readingsList: ArrayList<WaterData>, val context: Context): RecyclerView.Adapter<ReadingLogAdapter.ReadingLogViewHolder>() {
@@ -31,16 +32,16 @@ class ReadingLogAdapter(val readingsList: ArrayList<WaterData>, val context: Con
         val timeString = "${currentItem.hour}:$min.$sec"
         holder.time.text = timeString
 
-        val flowString = context.getString(R.string.flow_log, currentItem.flow.toString())
+        val flowString = context.getString(R.string.flow_log, FloatUtil.round(currentItem.flow,2).toString())
         holder.flow.text = flowString
 
-        val tempString = context.getString(R.string.temp_log, currentItem.temp.toString())
+        val tempString = context.getString(R.string.temp_log, FloatUtil.round(currentItem.temp,2).toString())
         holder.temp.text = tempString
 
-        val tdsString = context.getString(R.string.tds_log, currentItem.tds.toString())
+        val tdsString = context.getString(R.string.tds_log, FloatUtil.round(currentItem.tds,2).toString())
         holder.tds.text = tdsString
 
-        val phString = context.getString(R.string.ph_log, currentItem.pH.toString())
+        val phString = context.getString(R.string.ph_log, FloatUtil.round(currentItem.pH,2).toString())
         holder.ph.text = phString
     }
 
