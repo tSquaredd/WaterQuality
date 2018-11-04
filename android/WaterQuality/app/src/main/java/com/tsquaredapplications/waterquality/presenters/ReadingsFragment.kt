@@ -134,6 +134,9 @@ class ReadingsFragment : Fragment() {
                         phCard.spark_view.adapter = phAdapter
                     } else
                         phAdapter!!.addReading(it[it.size - 1].pH)
+
+                    loading_layout.visibility = View.INVISIBLE
+                    data_layout.visibility = View.VISIBLE
                 }
 
                 else {
