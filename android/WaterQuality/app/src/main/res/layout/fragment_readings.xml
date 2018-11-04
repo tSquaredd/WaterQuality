@@ -2,129 +2,70 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/readings_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presenters.ReadingsFragment"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:background="#777777">
 
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/flow_card"
+    <include
+        android:id="@+id/flow_view"
+        layout="@layout/reading_card_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/temp_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/flow_label"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/flow"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/flow_spark_view" />
-
-            <com.robinhood.ticker.TickerView
-                android:id="@+id/flow_ticker"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:textSize="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.robinhood.spark.SparkView
-                android:id="@+id/flow_spark_view"
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/flow_ticker"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.625"
-                app:layout_constraintStart_toEndOf="@+id/flow_ticker"
-                app:layout_constraintTop_toTopOf="@id/flow_ticker" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/temp_card"
+    <include
+        android:id="@+id/temp_view"
+        layout="@layout/reading_card_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tds_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/flow_card">
+        app:layout_constraintTop_toBottomOf="@+id/flow_view" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <include
+        android:id="@+id/tds_view"
+        layout="@layout/reading_card_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ph_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temp_view" />
 
-            <TextView
-                android:id="@+id/temp_label"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/temp"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/temp_spark_view" />
-
-            <com.robinhood.ticker.TickerView
-                android:id="@+id/temp_ticker"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:textSize="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.robinhood.spark.SparkView
-                android:id="@+id/temp_spark_view"
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/temp_ticker"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.625"
-                app:layout_constraintStart_toEndOf="@+id/temp_ticker"
-                app:layout_constraintTop_toTopOf="@id/temp_ticker" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-
-
-
+    <include
+        android:id="@+id/ph_view"
+        layout="@layout/reading_card_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tds_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

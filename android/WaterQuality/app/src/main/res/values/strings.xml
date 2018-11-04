@@ -8,4 +8,6 @@
     <string name="graph">Graph</string>
     <string name="flow">Water Flow</string>
     <string name="temp">Temperature</string>
+    <string name="tds">Total Dissolvable Solids</string>
+    <string name="ph">Potential Hydrogen (pH)</string>
 </resources>
